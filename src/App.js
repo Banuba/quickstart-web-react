@@ -3,8 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 
 import { useEffect } from "react"
-import { BANUBA_CLIENT_TOKEN } from "./BanubaClientToken"
-import { Webcam, Player, Effect, Dom } from "./BanubaSDK"
+import { BANUBA_CLIENT_TOKEN } from "./webar/BanubaClientToken"
+import BanubaSDKwasm from "./webar/BanubaSDK.wasm"
+import BanubaSDKdata from "./webar/BanubaSDK.data"
+import GlassesEffect from "./webar/Glasses.zip"
+import { Webcam, Player, Effect, Dom } from "./webar/BanubaSDK"
 
 function App() {
   // componentDidMount
@@ -22,13 +25,13 @@ function App() {
          * @see {@link https://docs.banuba.com/generated/typedoc/globals.html#sdkoptions} further information}
          */
         locateFile: {
-          "BanubaSDK.wasm": "webar/BanubaSDK.wasm",
-          "BanubaSDK.data": "webar/BanubaSDK.data",
+          "BanubaSDK.wasm": BanubaSDKwasm,
+          "BanubaSDK.data": BanubaSDKdata,
         },
       })
       .then((player) => {
         player.use(webcam)
-        player.applyEffect(new Effect("webar/Glasses.zip"))
+        player.applyEffect(new Effect(GlassesEffect))
         Dom.render(player, "#webar")
       })
 
