@@ -1,10 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 
-import { useEffect } from 'react';
+import { useEffect } from "react"
+import { BANUBA_CLIENT_TOKEN } from "./BanubaClientToken"
 import { Webcam, Player, Effect, Dom } from "./BanubaSDK"
-
-const BANUBA_CLIENT_TOKEN = "PUT YOUR CLIENT TOKEN HERE"
 
 function App() {
   // componentDidMount
@@ -22,8 +21,8 @@ function App() {
          * @see {@link https://docs.banuba.com/generated/typedoc/globals.html#sdkoptions} further information}
          */
         locateFile: {
-          'BanubaSDK.wasm': 'webar/BanubaSDK.wasm',
-          'BanubaSDK.data': 'webar/BanubaSDK.data',
+          "BanubaSDK.wasm": "webar/BanubaSDK.wasm",
+          "BanubaSDK.data": "webar/BanubaSDK.data",
         },
       })
       .then((player) => {

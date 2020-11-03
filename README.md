@@ -29,7 +29,8 @@ Clone the repository
 git clone https://github.com/Banuba/quickstart-web-react
 ```
 
-Install React dependencies:
+Install React dependencies
+
 ```bash
 npm install
 ```
@@ -54,6 +55,7 @@ quickstart-web-react/
       App.css
       App.js
       App.test.js
+      BanubaClientToken.js
 +     BanubaSDK.js
       index.css
       index.js
@@ -66,15 +68,16 @@ quickstart-web-react/
     README.md
 ```
 
-Insert Banuba [client token](#obtaining-banuba-client-token) at [src/App.js, line 7](./src/App.js#L7).
+Insert Banuba [client token](#obtaining-banuba-client-token) at [src/BanubaClientToken.js](./src/src/BanubaClientToken.js#L1)
 
 ```js
-const BANUBA_CLIENT_TOKEN = "PUT YOUR CLIENT TOKEN HERE"
+export const BANUBA_CLIENT_TOKEN = "PUT YOUR CLIENT TOKEN HERE"
 ```
 
 ### Local run
 
-Run the app in the development mode via the command:
+Run the app in the development mode via the command
+
 ```bash
 npm start
 ```
@@ -89,4 +92,4 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-To learn Banuba SDK Web AR, check out the [Banuba Web AR SDK documentation](https://docs.banuba.com/face-ar-sdk/web/web_overview)
+To learn Banuba SDK Web AR, check out the [Banuba Web AR SDK documentation](https://docs.banuba.com/face-ar-sdk/web/web_overview).
