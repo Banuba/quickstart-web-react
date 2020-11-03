@@ -2,6 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This version was ejected from default CRA template via
+```bash
+npm run eject
+```
+
+And [a few changes](./config/webpack.config.js#L527-L534) were added to webpack.config to support Banuba Web AR SDK WASM loading.
+
 ## Requirements
 
 - The [latest](#obtaining-banuba-sdk-web-ar) Banuba SDK Web AR release
@@ -26,7 +33,7 @@ To receive a new **trial** client token please fill in the [form on banuba.com](
 Clone the repository
 
 ```bash
-git clone https://github.com/Banuba/quickstart-web-react
+git clone https://github.com/Banuba/quickstart-web-react --branch custom-webpack-config
 ```
 
 Install React dependencies
@@ -35,28 +42,22 @@ Install React dependencies
 npm install
 ```
 
-Put Banuba SDK Web AR [files](#obtaining-banuba-sdk-web-ar) into the cloned folder
+Put Banuba SDK Web AR [files](#obtaining-banuba-sdk-web-ar) into the `src/webar/` of cloned folder
 
 ```diff
 quickstart-web-react/
     node_modules/
     public/
-+     webar/
+    src/
+      webar/
+        BanubaClientToken.js
 +       BanubaSDK.data
++       BanubaSDK.js
 +       BanubaSDK.wasm
         Glasses.zip
-      favicon.ico
-      index,html
-      logo192.png
-      logo5112.png
-      mainifest.json
-      robots.txt
-    src/
       App.css
       App.js
       App.test.js
-      BanubaClientToken.js
-+     BanubaSDK.js
       index.css
       index.js
       logo.svg
@@ -68,7 +69,7 @@ quickstart-web-react/
     README.md
 ```
 
-Insert Banuba [client token](#obtaining-banuba-client-token) at [src/BanubaClientToken.js](./src/src/BanubaClientToken.js#L1)
+Insert Banuba [client token](#obtaining-banuba-client-token) at [src/webar/BanubaClientToken.js](./src/webar/BanubaClientToken.js#L1)
 
 ```js
 export const BANUBA_CLIENT_TOKEN = "PUT YOUR CLIENT TOKEN HERE"
