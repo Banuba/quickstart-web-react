@@ -1,43 +1,87 @@
-# Getting Started with Create React App
+# Banuba Web AR SDK and React integration example
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- The [latest](#obtaining-banuba-sdk-web-ar) Banuba SDK Web AR release
+- Banuba [client token](#obtaining-banuba-client-token)
+- [Nodejs](https://nodejs.org/en/) installed
+- Browser with support of [WebGL 2.0](https://caniuse.com/#feat=webgl2)
 
-### `npm start`
+### Obtaining Banuba SDK Web AR
 
-Runs the app in the development mode.\
+To get the latest Banuba SDK Web AR release please fill in the [form on banuba.com](https://www.banuba.com/face-filters-sdk) website, or contact us via [info@banuba.com](mailto:info@banuba.com).
+
+### Obtaining Banuba Client token
+
+Banuba Client token is required to get Banuba SDK Web AR working.
+
+Generally it's delivered with Banuba SDK Web AR archive.
+
+To receive a new **trial** client token please fill in the [form on banuba.com](https://www.banuba.com/face-filters-sdk) website, or contact us via [info@banuba.com](mailto:info@banuba.com).
+
+## Environment setup and local run
+
+Clone the repository
+
+```bash
+git clone https://github.com/Banuba/quickstart-web-react
+```
+
+Install React dependencies:
+```bash
+npm install
+```
+
+Put Banuba SDK Web AR [files](#obtaining-banuba-sdk-web-ar) into the cloned folder
+
+```diff
+quickstart-web-react/
+    node_modules/
+    public/
++     webar/
++       BanubaSDK.data
++       BanubaSDK.wasm
+        Glasses.zip
+      favicon.ico
+      index,html
+      logo192.png
+      logo5112.png
+      mainifest.json
+      robots.txt
+    src/
+      App.css
+      App.js
+      App.test.js
++     BanubaSDK.js
+      index.css
+      index.js
+      logo.svg
+    .eslintignore
+    .gitignore
+    LICENSE
+    pacakge-lock.json
+    pacakge.json
+    README.md
+```
+
+Insert Banuba [client token](#obtaining-banuba-client-token) at [src/App.js, line 7](./src/App.js#L7).
+
+```js
+const BANUBA_CLIENT_TOKEN = "PUT YOUR CLIENT TOKEN HERE"
+```
+
+### Local run
+
+Run the app in the development mode via the command:
+```bash
+npm start
+```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
@@ -45,26 +89,4 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To learn Banuba SDK Web AR, check out the [Banuba Web AR SDK documentation](https://docs.banuba.com/face-ar-sdk/web/web_overview)

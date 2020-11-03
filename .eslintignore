@@ -1,0 +1,2 @@
+# There's no need to check the BanubaSDK.js since it's already a bundle 
+src/BanubaSDK.js
