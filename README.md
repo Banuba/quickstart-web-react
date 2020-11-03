@@ -68,7 +68,7 @@ quickstart-web-react/
     README.md
 ```
 
-Insert Banuba [client token](#obtaining-banuba-client-token) at [src/BanubaClientToken.js](./src/src/BanubaClientToken.js#L1)
+Insert Banuba [client token](#obtaining-banuba-client-token) at [src/BanubaClientToken.js](./src/BanubaClientToken.js#L1)
 
 ```js
 export const BANUBA_CLIENT_TOKEN = "PUT YOUR CLIENT TOKEN HERE"
@@ -85,6 +85,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+## Advanced usage
+
+For advanced usage including custom webpack config, please see the [custom-webpack-config](https://github.com/Banuba/quickstart-web-react/tree/custom-webpack-config) branch of the repository and especially pay attention to [this commit](https://github.com/Banuba/quickstart-web-react/commit/d81f03ad69564be30d2e33c076051a5a8fd41294) to get the idea.
 
 ## Learn More
 
