@@ -1,11 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 
-import { useEffect } from "react"
+import ReactPlayer from "react-player"
+import { useState, useEffect } from "react"
 import { BANUBA_CLIENT_TOKEN } from "./BanubaClientToken"
-import { Webcam, Player, Effect, Dom } from "./BanubaSDK"
+import { Webcam, Player, Effect, MediaStreamCapture } from "./BanubaSDK"
 
 function App() {
+  const [stream, setStream] = useState()
+
   // componentDidMount
   useEffect(() => {
     const webcam = new Webcam()
@@ -27,22 +30,27 @@ function App() {
       })
       .then((player) => {
         player.use(webcam)
+        player.play()
         player.applyEffect(new Effect("webar/Glasses.zip"))
-        Dom.render(player, "#webar")
+
+        const capture = new MediaStreamCapture(player)
+
+        setStream(capture)
       })
 
     // componentWillUnmount
     return () => {
       webcam.stop()
-      Dom.unmount("#webar")
     }
-  })
+  }, [])
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <div id="webar" style={{ maxWidth: '600px' }}></div>
+        <div id="webar" style={{ maxWidth: '600px' }}>
+          <ReactPlayer url={stream} playing/>
+        </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
