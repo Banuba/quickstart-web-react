@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { BANUBA_CLIENT_TOKEN } from "./BanubaClientToken"
 import { Webcam, Player, Module, Effect, Dom } from "@banuba/webar"
 
@@ -12,36 +12,39 @@ import data from "@banuba/webar/BanubaSDK.data"
 import FaceTracker from "@banuba/webar/face_tracker.zip"
 
 function App() {
+  const ref = useRef({})
+
   // componentDidMount
   useEffect(() => {
-    const webcam = new Webcam()
+    let webcam = ref.current.webcam
+    if (!webcam) webcam = ref.current.webcam = new Webcam()
     
-    Player
-      .create({
-        clientToken: BANUBA_CLIENT_TOKEN,
-        /**
-         * By default BanubaSDK.js tries to loads BanubaSDK.wasm and BanubaSDK.data files relative to itself.
-         * Since the BanubaSDK.js will be bundled to something like `static/js/[name].[hash].js` during a build
-         * and the BanubaSDK.wasm and BanubaSDK.data files may not lay next to the bundle file
-         * we have to tell the BanubaSDK where it can find these BanubaSDK.wasm and BanubaSDK.data files.
-         * @see {@link https://docs.banuba.com/generated/typedoc/globals.html#sdkoptions} further information}
-         */
-        locateFile: {
-          "BanubaSDK.wasm": wasm,
-          "BanubaSDK.simd.wasm": simd,
-          "BanubaSDK.data": data,
-        },
-      })
-      .then((player) => {
-        player.addModule(new Module(FaceTracker))
-          .then(() => {
-            player.use(webcam)
-            player.applyEffect(new Effect("effects/Glasses.zip"))
-            Dom.render(player, "#webar")
-          })
-      })
+    if (!ref.current.player)
+      ref.current.player = Player
+        .create({
+          clientToken: BANUBA_CLIENT_TOKEN,
+          /**
+           * By default BanubaSDK.js tries to loads BanubaSDK.wasm and BanubaSDK.data files relative to itself.
+           * Since the BanubaSDK.js will be bundled to something like `static/js/[name].[hash].js` during a build
+           * and the BanubaSDK.wasm and BanubaSDK.data files may not lay next to the bundle file
+           * we have to tell the BanubaSDK where it can find these BanubaSDK.wasm and BanubaSDK.data files.
+           * @see {@link https://docs.banuba.com/generated/typedoc/globals.html#sdkoptions} further information}
+           */
+          locateFile: {
+            "BanubaSDK.wasm": wasm,
+            "BanubaSDK.simd.wasm": simd,
+            "BanubaSDK.data": data,
+          },
+        })
+        .then((player) => {
+          player.addModule(new Module(FaceTracker))
+            .then(() => {
+              player.use(webcam)
+              player.applyEffect(new Effect("effects/Glasses.zip"))
+              Dom.render(player, "#webar")
+            })
+        })
 
-    // componentWillUnmount
     return () => {
       webcam.stop()
       Dom.unmount("#webar")
