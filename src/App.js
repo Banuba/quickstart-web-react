@@ -3,7 +3,13 @@ import './App.css';
 
 import { useEffect } from "react"
 import { BANUBA_CLIENT_TOKEN } from "./BanubaClientToken"
-import { Webcam, Player, Effect, Dom } from "./BanubaSDK"
+import { Webcam, Player, Module, Effect, Dom } from "@banuba/webar"
+
+import wasm from "@banuba/webar/BanubaSDK.wasm"
+import simd from "@banuba/webar/BanubaSDK.simd.wasm"
+import data from "@banuba/webar/BanubaSDK.data"
+
+import FaceTracker from "@banuba/webar/face_tracker.zip"
 
 function App() {
   // componentDidMount
@@ -21,14 +27,18 @@ function App() {
          * @see {@link https://docs.banuba.com/generated/typedoc/globals.html#sdkoptions} further information}
          */
         locateFile: {
-          "BanubaSDK.wasm": "webar/BanubaSDK.wasm",
-          "BanubaSDK.data": "webar/BanubaSDK.data",
+          "BanubaSDK.wasm": wasm,
+          "BanubaSDK.simd.wasm": simd,
+          "BanubaSDK.data": data,
         },
       })
       .then((player) => {
-        player.use(webcam)
-        player.applyEffect(new Effect("webar/Glasses.zip"))
-        Dom.render(player, "#webar")
+        player.addModule(new Module(FaceTracker))
+          .then(() => {
+            player.use(webcam)
+            player.applyEffect(new Effect("effects/Glasses.zip"))
+            Dom.render(player, "#webar")
+          })
       })
 
     // componentWillUnmount
