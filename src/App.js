@@ -40,7 +40,7 @@ function App() {
           player.addModule(new Module(FaceTracker))
             .then(() => {
               player.use(webcam)
-              player.applyEffect(new Effect("effects/Glasses.zip"))
+              player.applyEffect(new Effect("effects/glasses_Banuba.zip"))
               Dom.render(player, "#webar")
             })
         })
