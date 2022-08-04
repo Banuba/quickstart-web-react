@@ -9,6 +9,8 @@ import wasm from "@banuba/webar/BanubaSDK.wasm"
 import simd from "@banuba/webar/BanubaSDK.simd.wasm"
 import data from "@banuba/webar/BanubaSDK.data"
 
+// Find more about available modules:
+// https://docs.banuba.com/face-ar-sdk-v1/generated/typedoc/classes/Module.html
 import FaceTracker from "@banuba/webar/face_tracker.zip"
 
 function App() {
@@ -16,11 +18,8 @@ function App() {
 
   // componentDidMount
   useEffect(() => {
-    let webcam = ref.current.webcam
-    if (!webcam) webcam = ref.current.webcam = new Webcam()
-    
-    if (!ref.current.player)
-      ref.current.player = Player
+    const webcam = ref.current.webcam ??= new Webcam()  
+    const promise = ref.current.player ??= Player
         .create({
           clientToken: BANUBA_CLIENT_TOKEN,
           /**
@@ -48,6 +47,7 @@ function App() {
     return () => {
       webcam.stop()
       Dom.unmount("#webar")
+      promise.then((player) => player.destroy())
     }
   })
 
